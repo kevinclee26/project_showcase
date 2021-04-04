@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project Repository</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+	<p>Project List</p>
+	<div class="container">
+		{% for project_row in data_from_flask | batch(3, '&nbsp;') %}
+		<div class="row">
+			{% for project in project_row %}
+			<div class="col-md-4">
+				<figure>
+					<img class='img-thumbnail' src='{{project["thumbnail"]}}'/>
+					<figcaption>
+						<p>
+							<a href='{{project["repo_link"]}}'>Link</a>
+						</p>
+						<p>
+							<a href='{{project["contributor"]}}'>Contributor</a>
+						</p>
+					</figcaption>
+				</figure>
+			</div>
+			{% endfor %}
+		</div>
+		{% endfor %}
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+</html>
